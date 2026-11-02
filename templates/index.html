@@ -1,0 +1,436 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SERA — Your Intelligent AI Companion</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- LEFT: CHAT PANEL -->
+    <aside class="chat-panel">
+        <div class="panel-header">
+            <span class="panel-label">CHAT</span>
+            <button class="new-chat-btn" onclick="newChat()" title="New Chat" aria-label="New Chat">+</button>
+        </div>
+
+        <div class="chat-messages" id="chatContainer">
+            <div class="chat-welcome">
+                <div class="welcome-mark">S</div>
+                <div>
+                    <p class="welcome-title">Welcome to SERA</p>
+                    <p class="welcome-text">Your intelligent AI companion.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-input-wrapper">
+            <div class="chat-input">
+                <textarea id="messageInput" placeholder="Ask SERA anything..." rows="1" onkeydown="handleEnter(event)"></textarea>
+                <button id="sendButton" aria-label="Send message">↑</button>
+            </div>
+            <p class="input-note">SERA can make mistakes. Check important information.</p>
+        </div>
+    </aside>
+
+
+    <!-- CENTER: MAIN DASHBOARD -->
+    <main class="dashboard">
+        <header class="dashboard-header">
+            <div class="brand">
+                <div class="brand-mark">S</div>
+                <div class="brand-text">
+                    <span class="brand-name">SERA</span>
+                    <span class="brand-subtitle">YOUR INTELLIGENT AI COMPANION</span>
+                </div>
+            </div>
+
+            <div class="system-status">
+                <span class="status-dot"></span>
+                ONLINE
+            </div>
+        </header>
+
+        <!-- HERO -->
+        <section class="hero">
+            <p class="eyebrow">NEXUS AI</p>
+            <h1>What can<br><span>SERA</span> do for you?</h1>
+            <p class="hero-description">
+                One intelligent workspace for conversation,
+                productivity, learning and more.
+            </p>
+        </section>
+
+        <!-- MODULES -->
+        <section class="modules">
+            <div class="section-heading">
+                <span>MODULES</span>
+                <span class="section-line"></span>
+            </div>
+
+            <div class="module-grid">
+                <button class="module-card active" onclick="openModule('chat')">
+                    <span class="module-number">01</span>
+                    <span class="module-name">CHAT</span>
+                    <span class="module-description">Talk with SERA</span>
+                    <span class="module-arrow">↗</span>
+                </button>
+
+                <button class="module-card" onclick="openModule('tasks')">
+                    <span class="module-number">02</span>
+                    <span class="module-name">TASKS</span>
+                    <span class="module-description">Manage your work</span>
+                    <span class="module-arrow">↗</span>
+                </button>
+
+                <button class="module-card" onclick="openModule('schedule')">
+                    <span class="module-number">03</span>
+                    <span class="module-name">SCHEDULE</span>
+                    <span class="module-description">Plan your day</span>
+                    <span class="module-arrow">↗</span>
+                </button>
+
+                <button class="module-card" onclick="openModule('reminders')">
+                    <span class="module-number">04</span>
+                    <span class="module-name">REMINDERS</span>
+                    <span class="module-description">Never miss anything</span>
+                    <span class="module-arrow">↗</span>
+                </button>
+
+                <button class="module-card" onclick="openLearningWorkspace()">
+                    <span class="module-number">05</span>
+                    <span class="module-name">LEARNING</span>
+                    <span class="module-description">Study with SERA</span>
+                    <span class="module-arrow">↗</span>
+                </button>
+
+                
+
+                <button class="module-card" onclick="openModule('memory')">
+                    <span class="module-number">07</span>
+                    <span class="module-name">MEMORY</span>
+                    <span class="module-description">What SERA remembers</span>
+                    <span class="module-arrow">↗</span>
+                </button>
+            </div>
+        </section>
+
+        ```html
+<!-- LEARNING WORKSPACE -->
+<section class="productivity-section learning-workspace"
+         id="learningModule"
+         style="display: none;">
+
+    <div class="panel-header">
+        <span class="panel-label">SERA LEARNING STUDIO</span>
+        <button class="small-action"
+                onclick="closeLearningWorkspace()"
+                title="Close learning workspace">
+            ✕ Close
+        </button>
+    </div>
+
+    <div class="learning-heading">
+        <p class="eyebrow">YOUR PERSONAL AI TUTOR</p>
+        <h2>Learn something <span>new.</span></h2>
+        <p class="welcome-text">
+            Explore concepts, create study notes, and test your knowledge
+            with SERA.
+        </p>
+    </div>
+
+    <div class="learning-form">
+
+        <label for="learningTopic">What do you want to learn?</label>
+        <input
+            type="text"
+            id="learningTopic"
+            placeholder="e.g. DBMS Normalization, TCP vs UDP..."
+            maxlength="300"
+        >
+
+        <label for="learningMode">Choose a learning mode</label>
+        <select id="learningMode">
+            <option value="notes">Study Notes</option>
+            <option value="explain">Explain a Concept</option>
+            <option value="quiz">Generate a Quiz</option>
+        </select>
+
+        <label for="learningLevel">Explanation level</label>
+        <select id="learningLevel">
+            <option value="beginner">Beginner — explain from zero</option>
+            <option value="intermediate">Intermediate — college level</option>
+            <option value="exam">Exam Preparation — important points</option>
+        </select>
+
+        <div id="quizOptions" style="display: none;">
+            <label for="quizQuestionCount">Number of questions</label>
+            <select id="quizQuestionCount">
+                <option value="5">5 questions</option>
+                <option value="10">10 questions</option>
+                <option value="15">15 questions</option>
+            </select>
+        </div>
+
+        <button
+            class="learning-generate-btn"
+            id="generateLearningButton"
+            onclick="generateLearningContent()">
+            ✦ Generate with SERA
+        </button>
+
+        <p class="welcome-text">
+            Tip: Enter a specific topic to get more useful results.
+        </p>
+    </div>
+
+    <div id="learningStatus"
+         class="learning-status"
+         aria-live="polite"></div>
+
+<!-- SAVED LEARNING HISTORY -->
+<div class="learning-history-panel">
+    <div class="panel-header">
+        <span class="panel-label">YOUR LEARNING HISTORY</span>
+
+        <button
+            class="small-action"
+            type="button"
+            onclick="loadLearningHistory()">
+            ↻ Refresh
+        </button>
+    </div>
+
+    <div
+        id="learningHistoryList"
+        class="learning-history-list"
+        aria-live="polite">
+        <p class="welcome-text">
+            Loading your saved sessions...
+        </p>
+    </div>
+</div>
+<!-- END SAVED LEARNING HISTORY -->
+
+    <div id="learningOutput"
+         class="learning-output"
+         aria-live="polite">
+        <div class="learning-empty-state">
+            <div class="welcome-mark">S</div>
+            <h3>Your learning journey starts here.</h3>
+            <p>
+                Choose a topic and a learning mode.
+                Your generated content will appear here.
+            </p>
+        </div>
+    </div>
+
+</section>
+<!-- END LEARNING WORKSPACE -->
+```
+
+<!-- SCHEDULE WORKSPACE -->
+<section class="productivity-section schedule-workspace"
+         id="scheduleModule"
+         style="display: none;">
+
+    <div class="panel-header">
+        <span class="panel-label">SERA SCHEDULE PLANNER</span>
+        <button class="small-action"
+                type="button"
+                onclick="closeScheduleWorkspace()">
+            ✕ Close
+        </button>
+    </div>
+
+    <p class="welcome-text">
+        Organize your day by adding activities with dates and times.
+        Your events will be saved in MySQL.
+    </p>
+
+    <div class="learning-form">
+        <label for="scheduleTitle">Event title</label>
+        <input type="text"
+               id="scheduleTitle"
+               maxlength="200"
+               placeholder="e.g. DBMS study session"
+               required>
+
+        <label for="scheduleDescription">Description (optional)</label>
+        <textarea id="scheduleDescription"
+                  rows="2"
+                  placeholder="Add details about this activity"></textarea>
+
+        <label for="scheduleDate">Date</label>
+        <input type="date" id="scheduleDate" required>
+
+        <label for="scheduleStartTime">Start time</label>
+        <input type="time" id="scheduleStartTime" required>
+
+        <label for="scheduleEndTime">End time (optional)</label>
+        <input type="time" id="scheduleEndTime">
+
+        <button type="button"
+                class="learning-generate-btn"
+                id="saveScheduleButton"
+                onclick="addScheduleEvent()">
+            + Save Event
+        </button>
+    </div>
+
+    <div id="scheduleStatus"
+         class="learning-status"
+         aria-live="polite"></div>
+
+    <div class="learning-history-panel">
+        <div class="panel-header">
+            <span class="panel-label">YOUR SCHEDULE</span>
+            <button class="small-action"
+                    type="button"
+                    onclick="loadScheduleEvents()">
+                ↻ Refresh
+            </button>
+        </div>
+
+        <div id="scheduleEventsList" class="schedule-list">
+            <p class="welcome-text">Open Schedule to load your events.</p>
+        </div>
+    </div>
+
+</section>
+<!-- END SCHEDULE WORKSPACE -->
+
+        <!-- MEMORY WORKSPACE -->
+        <section class="productivity-section memory-manager" id="memoryModule">
+            <div class="panel-header">
+                <span class="panel-label">SERA MEMORY</span>
+                <button class="small-action" onclick="loadMemories()" title="Refresh memories" aria-label="Refresh memories">↻</button>
+            </div>
+
+            <p class="welcome-text">
+                Manage the useful facts SERA can use in future conversations.
+            </p>
+
+            <div class="memory-add-form">
+                <label for="memoryInput">Add a memory</label>
+                <textarea
+                    id="memoryInput"
+                    rows="3"
+                    maxlength="2000"
+                    placeholder="Example: I am learning C++ and DSA..."
+                ></textarea>
+                <button class="small-action" onclick="addMemory()">+ Add memory</button>
+            </div>
+
+            <div class="memory-list" id="memoryList">
+                Loading memories...
+            </div>
+        </section>
+
+        <!-- DASHBOARD FOOTER -->
+        <section class="dashboard-footer">
+            <div>
+                <span class="footer-label">SERA</span>
+                <span class="footer-text">Intelligent. Personal. Simple.</span>
+            </div>
+            <div class="footer-version">NEXUS AI / 01</div>
+        </section>
+    </main>
+
+
+    <!-- RIGHT: PRODUCTIVITY PANEL -->
+    <aside class="productivity-panel">
+
+        <!-- TASKS -->
+        <section class="productivity-section">
+            <div class="panel-header">
+                <span class="panel-label">TASKS</span>
+                <button class="small-action" onclick="addTask()" title="Add task" aria-label="Add task">+</button>
+            </div>
+            <div class="task-list" id="taskList">Loading tasks...</div>
+        </section>
+
+        <!-- REMINDERS -->
+        <section class="productivity-section">
+            <div class="panel-header">
+                <span class="panel-label">REMINDERS</span>
+                <button class="small-action" onclick="addReminder()" title="Add reminder" aria-label="Add reminder">+</button>
+            </div>
+            <div class="reminders-list" id="reminders-list">Loading reminders...</div>
+        </section>
+
+        
+<!-- TODAY'S SCHEDULE -->
+<section class="productivity-section">
+    <div class="section-title-row">
+        <span class="panel-label">TODAY'S SCHEDULE</span>
+        <span class="date-label" id="todayDate">TODAY</span>
+    </div>
+
+    <div id="todayScheduleList" class="schedule-list">
+        <p class="schedule-empty">Loading today's schedule...</p>
+    </div>
+
+    <button type="button" id="refreshTodaySchedule" class="secondary-button">
+        Refresh Schedule
+    </button>
+</section>
+
+
+        <!-- OVERVIEW -->
+        <section class="productivity-section stats-section">
+            <div class="panel-header">
+                <span class="panel-label">OVERVIEW</span>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-value" id="taskCount">--</span>
+                    <span class="stat-label">TASKS</span>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-value" id="reminderCount">--</span>
+                    <span class="stat-label">REMINDERS</span>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-value" id="memoryCount">--</span>
+                    <span class="stat-label">MEMORIES</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROFILE -->
+        <div class="productivity-footer">
+            <div class="profile-mark">M</div>
+            <div class="profile-info">
+                <span class="profile-name">MONIKA</span>
+                <span class="profile-status">PERSONAL WORKSPACE</span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- MARKED.JS -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- APPLICATION JAVASCRIPT -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+    <script>
+        const todayDateElement = document.getElementById("todayDate");
+
+        if (todayDateElement) {
+            todayDateElement.textContent = new Date()
+                .toLocaleDateString("en-IN", {
+                    day: "2-digit",
+                    month: "short"
+                })
+                .toUpperCase();
+        }
+    </script>
+
+</body>
+</html>

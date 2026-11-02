@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SERA - Your Intelligent AI Companion</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <span>✦</span> SERA
+        </div>
+
+        <button class="new-chat" onclick="newChat()">
+            + New Chat
+        </button>
+
+        <div class="sidebar-title">
+            Recent Chats
+        </div>
+
+        <div id="chatList">
+            <!-- Chat history will appear here later -->
+        </div>
+
+        <div class="sidebar-bottom">
+            <p>✦ SERA</p>
+            <small>Your Intelligent AI Companion</small>
+        </div>
+
+    </aside>
+
+
+    <!-- Main Chat Area -->
+    <main class="main">
+
+        <!-- Header -->
+        <header class="header">
+            <div>
+                <h2>SERA</h2>
+                <span class="status">
+                    <span class="status-dot"></span>
+                    Online
+                </span>
+            </div>
+        </header>
+
+
+        <!-- Messages -->
+        <section class="chat-container" id="chatContainer">
+
+            <div class="welcome">
+                <div class="sera-symbol">✦</div>
+
+                <h1>How can I help you?</h1>
+
+                <p>
+                    I'm SERA, your intelligent AI companion.
+                    Ask me anything.
+                </p>
+            </div>
+
+        </section>
+
+
+        <!-- Message Input -->
+        <div class="input-area">
+
+            <div class="input-box">
+
+                <textarea
+                    id="messageInput"
+                    placeholder="Message SERA..."
+                    rows="1"
+                    onkeydown="handleEnter(event)"
+                ></textarea>
+
+                <button id="sendButton" onclick="sendMessage()">
+                    ↑
+                </button>
+
+            </div>
+
+            <p class="disclaimer">
+                SERA can make mistakes. Check important information.
+            </p>
+
+        </div>
+
+    </main>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>
